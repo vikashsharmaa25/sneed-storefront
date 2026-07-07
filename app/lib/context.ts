@@ -31,15 +31,30 @@ export async function createHydrogenRouterContext(
   /**
    * Open a cache instance in the worker and a custom session instance.
    */
+  const sessionSecret = env?.SESSION_SECRET || 'foobar';
   if (!env?.SESSION_SECRET) {
-    throw new Error('SESSION_SECRET environment variable is not set');
+    console.warn('SESSION_SECRET environment variable is not set. Using fallback "foobar".');
   }
 
+  const cache = typeof caches !== 'undefined'
+    ? await caches.open('hydrogen')
+    : {
+        async match() {
+          return null;
+        },
+        async put() {
+          return;
+        },
+        async delete() {
+          return false;
+        },
+        async keys() {
+          return [];
+        },
+      } as any;
+
   const waitUntil = executionContext.waitUntil.bind(executionContext);
-  const [cache, session] = await Promise.all([
-    caches.open('hydrogen'),
-    AppSession.init(request, [env.SESSION_SECRET]),
-  ]);
+  const session = await AppSession.init(request, [sessionSecret]);
 
   const hydrogenContext = createHydrogenContext(
     {
