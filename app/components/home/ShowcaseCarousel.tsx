@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import ProductCard from "./ShowcaseCard"
 import { ChevronLeft, ChevronRight } from "lucide-react"

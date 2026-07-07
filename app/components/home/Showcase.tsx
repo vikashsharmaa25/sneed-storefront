@@ -1,4 +1,3 @@
-"use client"
 import ProductCarousel from "./ShowcaseCarousel"
 import StatsSection from "./StatsSection"
 

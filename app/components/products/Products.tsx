@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { Share2, Heart, ChevronDown, Play, Minus, Plus, Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
