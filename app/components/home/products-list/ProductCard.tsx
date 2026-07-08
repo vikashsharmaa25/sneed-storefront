@@ -9,6 +9,10 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
                     src={product.image_url || product.variant_image_url}
                     alt={product.product_title}
                     className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={400}
                 />
 
                 {product.isOnSale && (

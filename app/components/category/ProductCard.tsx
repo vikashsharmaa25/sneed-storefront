@@ -46,6 +46,10 @@ export default function ProductCard({ product }: Props) {
                     src={productImage}
                     alt={productName}
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={400}
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
                     }}

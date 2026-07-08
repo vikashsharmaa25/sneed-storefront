@@ -35,7 +35,7 @@ export function MainHeader() {
       <Container className="flex items-center justify-between h-[77px]">
         {/* Logo */}
         <div className="text-2xl font-bold text-gray-800">
-          <img src={SneedLogo} alt="logo" className='w-[174px] h-[60px]' />
+          <img src={SneedLogo} alt="logo" className='w-[174px] h-[60px]' loading="eager" fetchPriority="high" decoding="async" width={174} height={60} />
         </div>
 
         {/* Search Bar */}

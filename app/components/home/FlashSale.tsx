@@ -120,6 +120,10 @@ const FlashSale = ({ flashSales }: { flashSales?: FlashSaleData[] }) => {
                                     src={product.image}
                                     alt={product.name}
                                     className="w-full h-full object-contain"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width={400}
+                                    height={224}
                                 />
 
                                 {/* Badges */}

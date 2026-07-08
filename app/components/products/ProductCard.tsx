@@ -25,6 +25,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           src={image}
           alt={title}
           className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
+          loading="lazy"
+          decoding="async"
+          width={400}
+          height={400}
         />
       </div>
       <div className="p-5">
