@@ -24,7 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
           decoding="async"
           width={400}

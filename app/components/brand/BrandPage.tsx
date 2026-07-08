@@ -71,7 +71,7 @@ export default function BrandPage({ brand, products }: BrandPageProps) {
                 <img
                   src={brand.file_url}
                   alt={brand.name}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-cover p-2"
                   loading="eager"
                   decoding="async"
                   width={64}
@@ -162,7 +162,7 @@ function BrandProductCard({
         <img
           src={imgSrc}
           alt={product.name}
-          className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full h-full object-cover p-4 group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
           decoding="async"
           width={400}

@@ -101,7 +101,7 @@ export default function SeoArticleDetails({ article, recommendations = [] }: Seo
                                         <img
                                             src={article.file_url}
                                             alt={article.title}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-cover"
                                         />
                                     </div>
                                 )}

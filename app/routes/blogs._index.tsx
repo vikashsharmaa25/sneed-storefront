@@ -44,7 +44,7 @@ export default function BlogsRoute() {
                                 const cleanContent = blog.content ? blog.content.replace(/<[^>]*>/g, "") : "";
                                 const wordCount = cleanContent.split(/\s+/).length;
                                 const readTime = Math.max(1, Math.ceil(wordCount / wordsPerMinute));
-                                
+
                                 return (
                                     <div
                                         key={blog.id}
@@ -55,7 +55,7 @@ export default function BlogsRoute() {
                                             <img
                                                 src={blog.file_url || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=400&fit=crop'}
                                                 alt={blog.title}
-                                                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 p-4"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 p-4"
                                             />
                                             <div className="absolute top-3 left-3 bg-red-800 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                                                 Blog

@@ -22,7 +22,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
       <div className="p-6">

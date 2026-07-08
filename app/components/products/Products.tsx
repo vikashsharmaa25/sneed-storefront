@@ -31,7 +31,7 @@ const ImageGallery = ({ images }: any) => {
             <div className="bg-gray-100 rounded-lg aspect-4/3 overflow-hidden">
                 <img
                     src={images[selected].image_url}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     alt="product"
                 />
             </div>
@@ -46,7 +46,7 @@ const ImageGallery = ({ images }: any) => {
                     >
                         <img
                             src={img.image_url}
-                            className="w-full h-full object-contain rounded"
+                            className="w-full h-full object-cover rounded"
                         />
                     </button>
                 ))}

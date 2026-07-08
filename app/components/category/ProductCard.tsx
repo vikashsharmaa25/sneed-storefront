@@ -45,7 +45,7 @@ export default function ProductCard({ product }: Props) {
                 <img
                     src={productImage}
                     alt={productName}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
                     width={400}

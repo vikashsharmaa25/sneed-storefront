@@ -111,7 +111,7 @@ const HandpickedProducts: React.FC = () => {
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full object-cover"
                                     loading="lazy"
                                     decoding="async"
                                     width={400}

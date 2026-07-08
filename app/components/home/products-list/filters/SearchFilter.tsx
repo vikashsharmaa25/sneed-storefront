@@ -105,7 +105,7 @@ const SearchFilter: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
                                     onClick={() => setIsOpen(false)}
                                 >
                                     <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-50 shrink-0 border border-gray-100">
-                                        <img src={product.image_url || product.variant_image_url} alt="" className="w-full h-full object-contain" loading="lazy" decoding="async" width={48} height={48} />
+                                        <img src={product.image_url || product.variant_image_url} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" width={48} height={48} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-sm font-medium text-gray-900 truncate group-hover:text-indigo-600 transition-colors">

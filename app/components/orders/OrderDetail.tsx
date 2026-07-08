@@ -151,12 +151,12 @@ export function OrderDetail({ orderId }: OrderDetailProps) {
   const dateVal = order.createdAt || order.created_at;
   const formattedDate = dateVal
     ? new Date(dateVal).toLocaleDateString('en-IN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
     : 'Date unavailable';
 
   const status = order.status || order.order_status || 'pending';
@@ -209,10 +209,10 @@ export function OrderDetail({ orderId }: OrderDetailProps) {
 
       {/* Content Columns */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Left Column: Order Items & Pricing Breakdown */}
         <div className="lg:col-span-8 space-y-6">
-          
+
           {/* Items Section */}
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
@@ -230,7 +230,7 @@ export function OrderDetail({ orderId }: OrderDetailProps) {
                         <img
                           src={item.image_url}
                           alt={item.product_name || 'Product Image'}
-                          className="w-full h-full object-contain p-1 rounded-lg"
+                          className="w-full h-full object-cover p-1 rounded-lg"
                         />
                       ) : (
                         <Package className="w-8 h-8 text-gray-300" />
@@ -301,7 +301,7 @@ export function OrderDetail({ orderId }: OrderDetailProps) {
 
         {/* Right Column: Customer & Delivery Details */}
         <div className="lg:col-span-4 space-y-6">
-          
+
           {/* Customer / Shipping Address Card */}
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <h3 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">

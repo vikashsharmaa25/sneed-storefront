@@ -188,7 +188,7 @@ const SuccessStoriesSection: React.FC<SuccessStoriesSectionProps> = ({
                                     <img
                                         src={story.image}
                                         alt={story.title}
-                                        className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                                     />
                                     <div className={`absolute top-3 left-3 ${getTypeColor(story.type)} text-white text-xs font-semibold px-3 py-1 rounded-full`}>
                                         {getTypeLabel(story.type)}

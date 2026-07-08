@@ -5,7 +5,7 @@ export const LeadershipCard = ({ name, role, image, bio }: any) => {
     return (
         <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
             <div className="relative aspect-3/4 bg-gray-900 overflow-hidden">
-                <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-contain" />
+                <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-cover" />
                 {/* Gradient overlay at bottom */}
                 <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
 

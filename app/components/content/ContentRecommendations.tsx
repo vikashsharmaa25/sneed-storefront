@@ -77,7 +77,7 @@ const RecommendationCard: React.FC<{ item: ContentItem; type: string }> = ({ ite
         <img
           src={item.file_url || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=250&fit=crop'}
           alt={item.title}
-          className="w-full h-full object-contain group-hover:scale-103 transition-transform duration-500 ease-out"
+          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
           loading="lazy"
         />
         <div className="absolute top-3 left-3 z-10">

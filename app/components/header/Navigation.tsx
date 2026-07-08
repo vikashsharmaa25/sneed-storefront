@@ -109,7 +109,7 @@ export function Navigation({ items, categories = [] }: NavigationProps) {
                   ].map((product, idx) => (
                     <div key={idx} className="flex gap-4 group/prod cursor-pointer bg-white p-3 rounded-xl border border-transparent hover:border-red-200 hover:shadow-md transition-all">
                       <div className="relative w-20 h-20 bg-gray-50 rounded-lg overflow-hidden shrink-0">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-contain p-2" loading="lazy" decoding="async" width={80} height={80} />
+                        <img src={product.image} alt={product.name} className="w-full h-full object-cover p-2" loading="lazy" decoding="async" width={80} height={80} />
                         <span className={`absolute top-0 left-0 ${product.badgeColor} text-white text-[9px] font-bold px-1.5 py-0.5 rounded-br-lg shadow-sm`}>
                           {product.badge}
                         </span>

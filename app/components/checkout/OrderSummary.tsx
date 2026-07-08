@@ -31,7 +31,7 @@ export function OrderSummary({
                   <img
                     src={item.image_url}
                     alt={item.product_name}
-                    className="w-full h-full object-contain p-1 rounded-lg"
+                    className="w-full h-full object-cover p-1 rounded-lg"
                   />
                 ) : (
                   <Package className="w-8 h-8 text-gray-300" />

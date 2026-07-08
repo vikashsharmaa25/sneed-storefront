@@ -19,7 +19,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         <img
           src={images[selectedImage]}
           alt={altText}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         />
       </div>
       {images.length > 1 && (
@@ -35,7 +35,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
               <img
                 src={img}
                 alt={`Thumbnail ${idx + 1}`}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </button>
           ))}

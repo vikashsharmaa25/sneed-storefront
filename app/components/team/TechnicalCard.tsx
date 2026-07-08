@@ -13,7 +13,7 @@ export const TechnicalCard: React.FC<TechnicalCardProps> = ({ name, role, image,
         <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-white">
             {/* Image container */}
             <div className="aspect-square bg-gray-100 overflow-hidden">
-                <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-contain" />
+                <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-cover" />
             </div>
 
             {/* Content */}

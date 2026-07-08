@@ -97,7 +97,7 @@ export default function BlogDetails({ blog, recommendations = [] }: BlogDetailsP
                                         <img
                                             src={blog.file_url}
                                             alt={blog.title}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-cover"
                                         />
                                     </div>
                                 )}

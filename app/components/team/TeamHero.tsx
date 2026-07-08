@@ -11,7 +11,7 @@ const TeamHero: React.FC<TeamHeroProps> = ({
       <img
         src={image}
         alt="Team"
-        className="w-full h-full object-contain opacity-80"
+        className="w-full h-full object-cover opacity-80"
       />
       <div className="absolute inset-0 bg-linear-to-b from-transparent to-red-600/30"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
