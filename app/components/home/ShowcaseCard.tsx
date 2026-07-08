@@ -1,7 +1,8 @@
 import type React from "react"
 import { Star, ShoppingBag, ArrowRight } from "lucide-react"
+import { Link } from "react-router"
 
-const ProductCard: React.FC<any> = ({ title, description, rating, productCount, bgColor, isActive }) => {
+const ProductCard: React.FC<any> = ({ id, title, description, rating, productCount, bgColor, isActive }) => {
   return (
     <div
       className={`
@@ -39,10 +40,13 @@ const ProductCard: React.FC<any> = ({ title, description, rating, productCount, 
           {productCount}
         </div>
 
-        <button className="bg-white text-black px-5 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-gray-100 transition-colors">
+        <Link
+          to={`/brands/${id}`}
+          className="bg-white text-black px-5 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-gray-100 transition-colors"
+        >
           Explore {title.split(" ")[0]}
           <ArrowRight className="w-4 h-4" />
-        </button>
+        </Link>
       </div>
     </div>
   )

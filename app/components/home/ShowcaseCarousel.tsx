@@ -18,15 +18,15 @@ const bgColors = [
 const ProductCarousel = ({ brands: apiBrands }: { brands?: any[] }) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const carouselData = apiBrands && apiBrands.length > 0 
+  const carouselData = apiBrands && apiBrands.length > 0
     ? apiBrands.map((brand, index) => ({
-        id: brand.id,
-        title: brand.name,
-        description: brand.description || "Premium coding system providing ultra-fine printing and superior durability.",
-        rating: brand.rating || (4.5 + Math.random() * 0.5).toFixed(1),
-        productCount: brand.productCount || `${Math.floor(Math.random() * 500) + 50}+ Products`,
-        bgColor: bgColors[index % bgColors.length],
-      }))
+      id: brand.id,
+      title: brand.name,
+      description: brand.description || "Premium coding system providing ultra-fine printing and superior durability.",
+      rating: brand.rating || (4.5 + Math.random() * 0.5).toFixed(1),
+      productCount: brand.product_count != null ? `${brand.product_count} Products` : `0 Products`,
+      bgColor: bgColors[index % bgColors.length],
+    }))
     : [];
 
   useEffect(() => {
