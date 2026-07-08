@@ -134,15 +134,21 @@ export function Navigation({ items, categories = [] }: NavigationProps) {
           <div className="flex flex-1 items-center justify-end">
             {items.map((item) => (
               <li key={item.href} className="relative group text-white ">
-                <a
-                  href={item.href}
-                  className="px-4 py-3 font-normal text-[16px] capitalize space-x-2 flex justify-between items-center hover:text-red-500 transition-colors"
-                >
-                  {item.label}
-                  {item.children && (
+                {item.children ? (
+                  <span
+                    className="px-4 py-3 font-normal text-[16px] capitalize space-x-2 flex justify-between items-center hover:text-red-500 transition-colors cursor-default select-none"
+                  >
+                    {item.label}
                     <ChevronDown className="ml-1 h-4 w-4 inline-block" />
-                  )}
-                </a>
+                  </span>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="px-4 py-3 font-normal text-[16px] capitalize space-x-2 flex justify-between items-center hover:text-red-500 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                )}
 
                 {/* Dropdown menu */}
                 {item.children && (

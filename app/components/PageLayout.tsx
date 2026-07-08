@@ -1,6 +1,5 @@
 import NewsletterFooter from './Footer';
 import { Header } from './header/Header';
-import Home from './Home';
 
 interface PageLayoutProps {
   children?: React.ReactNode;
