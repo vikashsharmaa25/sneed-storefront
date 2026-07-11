@@ -72,6 +72,7 @@ export function Header({
     ],
     categories = [],
     industries = [],
+    featuredProducts = [],
 }: HeaderProps) {
     console.log('Industries in Header:', industries);
     const finalNavigationItems = navigationItems.map(item => {
@@ -102,7 +103,7 @@ export function Header({
                 socialMedia={socialMedia}
             />
             <MainHeader />
-            <Navigation items={finalNavigationItems} categories={categories} />
+            <Navigation items={finalNavigationItems} categories={categories} featuredProducts={featuredProducts} />
         </header>
     );
 }

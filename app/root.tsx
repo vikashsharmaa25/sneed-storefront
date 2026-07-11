@@ -23,6 +23,7 @@ import { CartProvider } from './lib/cart-context';
 import { AuthProvider } from './lib/auth-context';
 import { getCategories } from './lib/api/categories.server';
 import { getIndustries } from './lib/api/industries.server';
+import { getProducts } from './lib/api/products.server';
 
 export type RootLoader = typeof loader;
 
@@ -81,13 +82,20 @@ export async function loader(args: Route.LoaderArgs) {
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-  const [categories, industries] = await Promise.all([
+  const [categories, industries, featuredProducts] = await Promise.all([
     getCategories().catch((error: Error) => {
       console.error('[Root] Failed to fetch categories:', error);
       return [];
     }),
     getIndustries({ status: 'active', offset: 0 }).catch((error: Error) => {
       console.error('[Root] Failed to fetch industries:', error);
+      return [];
+    }),
+    getProducts({ limit: 100 }).then((products: any) => {
+      if (!Array.isArray(products)) return [];
+      return products.filter((p: any) => p.is_featured === true || p.is_featured === 1 || p.is_featured === 'true').slice(0, 3);
+    }).catch((error: Error) => {
+      console.error('[Root] Failed to fetch featured products:', error);
       return [];
     })
   ]);
@@ -99,6 +107,7 @@ export async function loader(args: Route.LoaderArgs) {
     ...criticalData,
     categories: categories,
     industries: industries,
+    featuredProducts: featuredProducts,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
     shop: getShopAnalytics({
       storefront,

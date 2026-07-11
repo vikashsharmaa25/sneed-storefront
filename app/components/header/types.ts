@@ -19,4 +19,5 @@ export interface HeaderProps {
   socialMedia?: SocialMedia[];
   categories?: any[];
   industries?: any[];
+  featuredProducts?: any[];
 }

@@ -8,6 +8,7 @@ import { Link } from 'react-router';
 interface NavigationProps {
   items: NavigationItem[];
   categories?: any[];
+  featuredProducts?: any[];
 }
 
 const getIcon = (iconName: string) => {
@@ -22,7 +23,7 @@ const getIcon = (iconName: string) => {
   }
 };
 
-export function Navigation({ items, categories = [] }: NavigationProps) {
+export function Navigation({ items, categories = [], featuredProducts = [] }: NavigationProps) {
   const industriesItem = items.find(item => item.label === 'Industries');
   console.log('Industries in Navigation:', industriesItem?.children);
   return (
@@ -84,48 +85,51 @@ export function Navigation({ items, categories = [] }: NavigationProps) {
               <div className="w-[350px] bg-gray-50 p-6 border-l border-gray-200 flex flex-col">
                 <h3 className="text-lg font-bold text-gray-800 mb-6">Featured Products</h3>
                 <div className="space-y-6 flex-1">
-                  {[
-                    {
-                      name: "SNEED-JET® Titan Printer",
-                      price: "Rs. 107,900.00",
-                      badge: "BESTSELLER",
-                      badgeColor: "bg-red-600",
-                      image: "https://placehold.co/80x80?text=Titan"
-                    },
-                    {
-                      name: "Freedom Handheld",
-                      price: "Rs. 89,500.00",
-                      badge: "SALE",
-                      badgeColor: "bg-black",
-                      image: "https://placehold.co/80x80?text=Freedom"
-                    },
-                    {
-                      name: "Infinity Inkjet Printer",
-                      price: "Rs. 152,500.00",
-                      badge: "NEW",
-                      badgeColor: "bg-red-600",
-                      image: "https://placehold.co/80x80?text=Infinity"
-                    }
-                  ].map((product, idx) => (
-                    <div key={idx} className="flex gap-4 group/prod cursor-pointer bg-white p-3 rounded-xl border border-transparent hover:border-red-200 hover:shadow-md transition-all">
-                      <div className="relative w-20 h-20 bg-gray-50 rounded-lg overflow-hidden shrink-0">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-cover p-2" loading="lazy" decoding="async" width={80} height={80} />
-                        <span className={`absolute top-0 left-0 ${product.badgeColor} text-white text-[9px] font-bold px-1.5 py-0.5 rounded-br-lg shadow-sm`}>
-                          {product.badge}
-                        </span>
-                      </div>
-                      <div className="flex flex-col justify-center">
-                        <h4 className="font-bold text-gray-800 text-sm group-hover/prod:text-red-600 transition-colors leading-tight">
-                          {product.name}
-                        </h4>
-                        <p className="text-red-600 font-bold text-sm mt-1">{product.price}</p>
-                      </div>
+                  {featuredProducts.length > 0 ? (
+                    featuredProducts.map((product) => (
+                      <Link
+                        key={product.id}
+                        to={`/products/${product.id}`}
+                        className="flex gap-4 group/prod cursor-pointer bg-white p-3 rounded-xl border border-transparent hover:border-red-200 hover:shadow-md transition-all w-full text-left"
+                      >
+                        <div className="relative w-20 h-20 bg-gray-50 rounded-lg overflow-hidden shrink-0">
+                          <img
+                            src={product.image_url || product.variant_image_url || "https://placehold.co/80x80?text=Product"}
+                            alt={product.product_title}
+                            className="w-full h-full object-cover p-2"
+                            loading="lazy"
+                            decoding="async"
+                            width={80}
+                            height={80}
+                          />
+                          {product.sale && (
+                            <span className="absolute top-0 left-0 bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-br-lg shadow-sm">
+                              SALE
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <h4 className="font-bold text-gray-800 text-sm group-hover/prod:text-red-600 transition-colors leading-tight line-clamp-2">
+                            {product.product_title}
+                          </h4>
+                          <p className="text-red-600 font-bold text-sm mt-1">
+                            Rs. {(product.selling_price || 0).toLocaleString("en-IN")}
+                          </p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="py-4 text-center text-gray-500 italic">
+                      No featured products found
                     </div>
-                  ))}
+                  )}
                 </div>
-                <button className="w-full bg-red-600 text-white font-bold py-3.5 rounded-lg mt-8 hover:bg-red-700 transition-colors shadow-lg shadow-red-200">
+                <Link
+                  to="/categories"
+                  className="w-full bg-red-600 text-white font-bold py-3.5 rounded-lg mt-8 hover:bg-red-700 transition-colors shadow-lg shadow-red-200 text-center block"
+                >
                   View All Products
-                </button>
+                </Link>
               </div>
             </div>
           </li>
