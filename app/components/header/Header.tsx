@@ -51,7 +51,7 @@ export function Header({
             ]
         },
         { label: "Applications", href: "/applications" },
-        { label: "Solutions", href: "/solutions" },
+        { label: "Knowledge Base", href: "/knowledge-base" },
         {
             label: "Resources",
             href: "/resources",
