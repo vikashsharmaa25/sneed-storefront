@@ -46,3 +46,28 @@ export async function getContentRecommendations() {
     const response = await fetchFromApi<any>("home/content-recommendations");
     return response.data;
 }
+
+export async function getTempSeoArticles() {
+    const response = await fetchFromApi<any>("temp-seo-articles");
+    return response.data || [];
+}
+
+export async function getTempSeoArticleById(id: string | number) {
+    const response = await fetchFromApi<any>(`temp-seo-articles/${id}`);
+    return response;
+}
+
+export interface PerformanceGuaranteeItem {
+    id: number;
+    page: string;
+    sectionKey: string;
+    title: string | null;
+    subtitle: string | null;
+    content: string | null;
+    status: string;
+}
+
+export async function getPerformanceGuarantee(): Promise<PerformanceGuaranteeItem[]> {
+    const response = await fetchFromApi<PerformanceGuaranteeItem[]>("performance-guarantee/performance-guarantee");
+    return response || [];
+}

@@ -58,7 +58,8 @@ export function Header({
             children: [
                 { label: "Blog", href: "/blogs" },
                 { label: "Success Stories", href: "/success-stories" },
-                { label: "Articles", href: "/seo-articles" }
+                { label: "Articles", href: "/seo-articles" },
+                { label: "Product Articles", href: "/temp-seo-articles" }
             ]
         },
         { label: "Performance Guarantee", href: "/guarantee" },
