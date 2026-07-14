@@ -91,3 +91,49 @@ export function KnowledgeBaseCard({ item }: KnowledgeBaseCardProps) {
         </Link>
     );
 }
+
+export function KnowledgeBaseCardSkeleton() {
+    return (
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden animate-pulse">
+            {/* Top accent stripe */}
+            <div className="h-1.5 bg-gray-200 w-full" />
+
+            <div className="p-6 flex flex-col flex-1 space-y-4">
+                {/* Category + Language badges */}
+                <div className="flex items-center gap-2 flex-wrap">
+                    <div className="h-6 w-20 bg-gray-200 rounded-full" />
+                    <div className="h-6 w-24 bg-gray-200 rounded-full" />
+                </div>
+
+                {/* Title */}
+                <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-full" />
+                    <div className="h-4 bg-gray-200 rounded w-5/6" />
+                </div>
+
+                {/* Summary */}
+                <div className="space-y-2 flex-1 pt-2">
+                    <div className="h-3 bg-gray-200 rounded w-full" />
+                    <div className="h-3 bg-gray-200 rounded w-full" />
+                    <div className="h-3 bg-gray-200 rounded w-2/3" />
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="h-5 w-12 bg-gray-200 rounded" />
+                    <div className="h-5 w-16 bg-gray-200 rounded" />
+                    <div className="h-5 w-14 bg-gray-200 rounded" />
+                </div>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                    <div className="flex items-center gap-3 w-2/3">
+                        <div className="h-3 bg-gray-200 rounded w-1/2" />
+                        <div className="h-3 bg-gray-200 rounded w-1/3" />
+                    </div>
+                    <div className="h-3 bg-gray-200 rounded w-10" />
+                </div>
+            </div>
+        </div>
+    );
+}

@@ -51,6 +51,17 @@ export function KnowledgeBaseHero({ search, onSearchChange }: KnowledgeBaseHeroP
                 <p className="text-lg max-w-2xl mb-8" style={{ color: '#9ca3af' }}>
                     Explore our library of technical guides, solutions, and coding best practices for industrial applications.
                 </p>
+
+                <div className="max-w-2xl relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                        type="text"
+                        placeholder="Search by keywords, tags, category, or title..."
+                        value={search}
+                        onChange={(e) => onSearchChange(e.target.value)}
+                        className="w-full bg-white/10 hover:bg-white/15 focus:bg-white text-white focus:text-gray-900 border border-white/20 focus:border-red-500 rounded-xl py-3.5 pl-12 pr-4 outline-none transition-all duration-200 placeholder-gray-400 focus:placeholder-gray-500 shadow-lg text-sm md:text-base focus:ring-2 focus:ring-red-500/20"
+                    />
+                </div>
             </Container>
         </div>
     );

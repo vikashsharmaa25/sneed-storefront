@@ -24,11 +24,54 @@ export interface KnowledgeBaseResponse {
     lastKey: string | null;
 }
 
-export async function getKnowledgeBase(limit?: number, lastKey?: string | null): Promise<KnowledgeBaseResponse> {
-    let query = '';
-    if (limit) query += `limit=${limit}`;
-    if (lastKey) query += `${query ? '&' : ''}exclusiveStartKey=${lastKey}`;
+export interface KnowledgeBaseFilters {
+    limit?: number;
+    exclusiveStartKey?: string | null;
+    category?: string;
+    language?: string;
+    author?: string;
+    region?: string;
+    tags?: string;
+    from?: string;
+    to?: string;
+    q?: string;
+}
+
+export async function getKnowledgeBase(filters: KnowledgeBaseFilters = {}): Promise<KnowledgeBaseResponse> {
+    const params = new URLSearchParams();
     
+    if (filters.limit !== undefined && filters.limit !== null) {
+        params.set('limit', String(filters.limit));
+    }
+    if (filters.exclusiveStartKey) {
+        params.set('exclusiveStartKey', filters.exclusiveStartKey);
+    }
+    if (filters.category) {
+        params.set('category', filters.category);
+    }
+    if (filters.language) {
+        params.set('language', filters.language);
+    }
+    if (filters.author) {
+        params.set('author', filters.author);
+    }
+    if (filters.region) {
+        params.set('region', filters.region);
+    }
+    if (filters.tags) {
+        params.set('tags', filters.tags);
+    }
+    if (filters.from) {
+        params.set('from', filters.from);
+    }
+    if (filters.to) {
+        params.set('to', filters.to);
+    }
+    if (filters.q) {
+        params.set('q', filters.q);
+    }
+    
+    const query = params.toString();
     const endpoint = `knowledge-base${query ? `?${query}` : ''}`;
     const response = await fetchFromApi<KnowledgeBaseResponse>(endpoint);
     return response;
