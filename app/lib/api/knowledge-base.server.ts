@@ -39,7 +39,7 @@ export interface KnowledgeBaseFilters {
 
 export async function getKnowledgeBase(filters: KnowledgeBaseFilters = {}): Promise<KnowledgeBaseResponse> {
     const params = new URLSearchParams();
-    
+
     if (filters.limit !== undefined && filters.limit !== null) {
         params.set('limit', String(filters.limit));
     }
@@ -70,7 +70,7 @@ export async function getKnowledgeBase(filters: KnowledgeBaseFilters = {}): Prom
     if (filters.q) {
         params.set('q', filters.q);
     }
-    
+
     const query = params.toString();
     const endpoint = `knowledge-base${query ? `?${query}` : ''}`;
     const response = await fetchFromApi<KnowledgeBaseResponse>(endpoint);
@@ -82,7 +82,6 @@ export async function getKnowledgeBaseById(id: string): Promise<KnowledgeBaseIte
     return response;
 }
 
-// Server-side cache implementation
 interface KBCache {
     items: KnowledgeBaseItem[];
     totalCount: number;
@@ -111,27 +110,36 @@ async function fetchAllItemsSequentially(): Promise<{ items: KnowledgeBaseItem[]
     let limit = 100;
     let page = 1;
     let totalCountFromApi = 0;
+    let previousLastKey: string | null = null;
 
     try {
         do {
             let query = `limit=${limit}`;
             if (lastKey) query += `&exclusiveStartKey=${lastKey}`;
             const res = await fetchFromApi<KnowledgeBaseResponse>(`knowledge-base?${query}`);
-            
+
             if (res.total_count) {
                 totalCountFromApi = res.total_count;
             }
+            let addedCount = 0;
             if (res.data && Array.isArray(res.data)) {
-                // Deduplicate items
                 const existingIds = new Set(allItems.map(i => i.id));
                 const newItems = res.data.filter(i => !existingIds.has(i.id));
                 allItems.push(...newItems);
+                addedCount = newItems.length;
             }
+
+            previousLastKey = lastKey;
             lastKey = res.lastKey;
             page++;
-            // Yield to event loop to avoid blocking server execution
+            if (lastKey && lastKey === previousLastKey) {
+                break;
+            }
+            if (lastKey && addedCount === 0 && res.data && res.data.length === 0) {
+                break;
+            }
             await new Promise(resolve => setTimeout(resolve, 50));
-        } while (lastKey && allItems.length < 3000);
+        } while (lastKey && allItems.length < 3000 && page <= 35);
     } catch (err) {
         console.error("Failed to fetch sequential items for KB cache:", err);
         throw err;
@@ -146,9 +154,7 @@ async function fetchAllItemsSequentially(): Promise<{ items: KnowledgeBaseItem[]
 export async function getKnowledgeBaseCached(waitUntil?: (promise: Promise<any>) => void): Promise<{ items: KnowledgeBaseItem[]; totalCount: number; syncing: boolean }> {
     const cache = getGlobalCache();
     const now = Date.now();
-    const CACHE_TTL = 30 * 60 * 1000; // 30 minutes cache
-
-    // If cache is empty, fetch the first page synchronously to return some data immediately
+    const CACHE_TTL = 30 * 60 * 1000;
     if (cache.items.length === 0) {
         if (!cache.isFetching) {
             cache.isFetching = true;
@@ -157,8 +163,6 @@ export async function getKnowledgeBaseCached(waitUntil?: (promise: Promise<any>)
                 cache.items = firstPage.data || [];
                 cache.totalCount = firstPage.total_count || cache.items.length;
                 cache.lastFetched = now;
-
-                // Fire background task to load the rest
                 const backgroundFetchPromise = (async () => {
                     try {
                         const result = await fetchAllItemsSequentially();
@@ -175,6 +179,8 @@ export async function getKnowledgeBaseCached(waitUntil?: (promise: Promise<any>)
 
                 if (waitUntil) {
                     waitUntil(backgroundFetchPromise);
+                } else {
+                    await backgroundFetchPromise;
                 }
             } catch (err) {
                 cache.isFetching = false;
@@ -185,7 +191,6 @@ export async function getKnowledgeBaseCached(waitUntil?: (promise: Promise<any>)
         return { items: cache.items, totalCount: cache.totalCount, syncing: true };
     }
 
-    // Stale-While-Revalidate pattern: return stale cache immediately and fetch in background
     const isExpired = now - cache.lastFetched > CACHE_TTL;
     if (isExpired && !cache.isFetching) {
         cache.isFetching = true;
@@ -205,6 +210,8 @@ export async function getKnowledgeBaseCached(waitUntil?: (promise: Promise<any>)
 
         if (waitUntil) {
             waitUntil(backgroundRevalidatePromise);
+        } else {
+            await backgroundRevalidatePromise;
         }
     }
 
