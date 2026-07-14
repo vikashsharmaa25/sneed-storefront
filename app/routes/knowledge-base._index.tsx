@@ -60,7 +60,6 @@ export async function loader({ request, context }: any) {
             }
         };
     } catch (error) {
-        console.error('Failed to load knowledge base from API:', error);
         return {
             items: [],
             total_count: 0,
