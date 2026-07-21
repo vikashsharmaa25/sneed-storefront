@@ -17,6 +17,7 @@ interface TempSeoArticleDetailsProps {
 }
 
 export default function TempSeoArticleDetails({ article }: TempSeoArticleDetailsProps) {
+    console.log('[TempSeoArticleDetails Component] article:', article);
     if (!article) {
         return (
             <div className="py-20 text-center text-gray-500">
@@ -38,7 +39,7 @@ export default function TempSeoArticleDetails({ article }: TempSeoArticleDetails
                             <span>/</span>
                             <Link to="/temp-seo-articles" className="hover:text-red-800 transition-colors">Product Articles</Link>
                             <span>/</span>
-                            <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-[400px]">
+                            <span className="text-gray-900 font-medium truncate max-w-50 sm:max-w-100">
                                 {article.title}
                             </span>
                         </nav>
